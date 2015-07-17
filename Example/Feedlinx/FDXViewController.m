@@ -28,8 +28,9 @@
     } else {// 一度もOAuth認証を通っていない場合
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.0 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
             AuthorizationViewController*vc = [AuthorizationViewController new];
+            UINavigationController*nc = [[UINavigationController alloc] initWithRootViewController:vc];
             vc.delegate = self;
-            [self presentViewController:vc animated:true completion:nil];
+            [self presentViewController:nc animated:true completion:nil];
         });
     }
 }
@@ -61,6 +62,8 @@
     }];
 }
 
-
+- (void)didCloseAuthorizationViewController:(AuthorizationViewController *)controller{
+    [controller dismissViewControllerAnimated:true completion:nil];
+}
 
 @end

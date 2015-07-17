@@ -12,8 +12,9 @@
 
 @class AuthorizationViewController;
 @protocol AuthorizationViewControllerDelegate <NSObject>
-- (void)authorizationPageController:(AuthorizationViewController *)controller
+- (void)authorizationViewController:(AuthorizationViewController *)controller
              didFinishUserAuthorize:(FDXAccount *)account;
+- (void)didCloseAuthorizationViewController:(AuthorizationViewController *)controller;
 @end
 
 @interface AuthorizationViewController : UIViewController

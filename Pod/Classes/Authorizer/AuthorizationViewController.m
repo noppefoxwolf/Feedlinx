@@ -27,6 +27,34 @@
                                      clientSecret:@"A4143F56J75FGQY7TAJM"];
     self.oauth.delegate = self;
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.oauth.authorizationURL]];
+    
+    self.title = @"Authorization";
+    [self.navigationController setToolbarHidden:false animated:true];
+    UIBarButtonItem*back = [[UIBarButtonItem alloc] initWithTitle:@" <  "
+                                                            style:UIBarButtonItemStyleDone
+                                                           target:self
+                                                           action:@selector(backAction)];
+    UIBarButtonItem*next = [[UIBarButtonItem alloc] initWithTitle:@"  >   "
+                                                            style:UIBarButtonItemStyleDone
+                                                           target:self
+                                                           action:@selector(nextAction)];
+    UIBarButtonItem*space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    UIBarButtonItem*close = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop
+                                                                          target:self
+                                                                          action:@selector(closeAction)];
+    self.toolbarItems = @[close,space,back,next];
+}
+
+- (void)backAction{
+    [self.webView goBack];
+}
+- (void)nextAction{
+    [self.webView goForward];
+}
+- (void)closeAction{
+    if ([self.delegate respondsToSelector:@selector(didCloseAuthorizationViewController:)]) {
+         [self.delegate didCloseAuthorizationViewController:self];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -55,7 +83,9 @@
 
 - (void)FDXOauth2Delegate:(FDXOauth2 *)oauth response:(NSDictionary *)response{
     FDXAccount*account = [FDXAccount accountWithStatus:response];
-    [self.delegate authorizationPageController:self didFinishUserAuthorize:account];
+    if ([self.delegate respondsToSelector:@selector(authorizationViewController:didFinishUserAuthorize:)]) {
+        [self.delegate authorizationViewController:self didFinishUserAuthorize:account];
+    }
 }
 
 @end
