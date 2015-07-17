@@ -1,0 +1,13 @@
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+
+target 'Feedlinx_Example', :exclusive => true do
+  pod "Feedlinx", :path => "../"
+end
+
+target 'Feedlinx_Tests', :exclusive => true do
+  pod "Feedlinx", :path => "../"
+
+  pod 'Specta'
+  pod 'Expecta'
+end
