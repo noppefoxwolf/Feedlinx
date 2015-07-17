@@ -19,7 +19,7 @@
     if (self) {
         self.status = status;
         self.access_token = self.status[@"access_token"];
-        self.account_id = self.status[@"account_id"];
+        self.account_id = self.status[@"id"];
         self.plan = self.status[@"plan"];
         self.refresh_token = self.status[@"refresh_token"];
         self.token_type = self.status[@"token_type"];
@@ -36,7 +36,7 @@
     self = [super init];
     if (self) {
         self.access_token = [decoder decodeObjectForKey:@"access_token"];
-        self.account_id = [decoder decodeObjectForKey:@"account_id"];
+        self.account_id = [decoder decodeObjectForKey:@"id"];
         self.plan = [decoder decodeObjectForKey:@"plan"];
         self.refresh_token = [decoder decodeObjectForKey:@"refresh_token"];
         self.token_type = [decoder decodeObjectForKey:@"token_type"];
@@ -46,7 +46,7 @@
 
 - (void)encodeWithCoder:(NSCoder *)encoder{
     [encoder encodeObject:self.access_token forKey:@"access_token"];
-    [encoder encodeObject:self.account_id forKey:@"account_id"];
+    [encoder encodeObject:self.account_id forKey:@"id"];
     [encoder encodeObject:self.plan forKey:@"plan"];
     [encoder encodeObject:self.refresh_token forKey:@"refresh_token"];
     [encoder encodeObject:self.token_type forKey:@"token_type"];
