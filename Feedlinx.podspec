@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "Feedlinx"
-  s.version          = "0.1.0"
+  s.version          = "0.2.0"
   s.summary          = "Feedly API Library for iOS."
   s.description      = <<-DESC
 			#Feedly API Library for iOS.
