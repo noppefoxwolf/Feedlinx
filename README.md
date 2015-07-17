@@ -1,5 +1,9 @@
 # Feedlinx
 
+![](./banner.png)
+
+
+
 [![CI Status](http://img.shields.io/travis/hirano_tomoya/Feedlinx.svg?style=flat)](https://travis-ci.org/hirano_tomoya/Feedlinx)
 [![Version](https://img.shields.io/cocoapods/v/Feedlinx.svg?style=flat)](http://cocoapods.org/pods/Feedlinx)
 [![License](https://img.shields.io/cocoapods/l/Feedlinx.svg?style=flat)](http://cocoapods.org/pods/Feedlinx)
@@ -22,7 +26,7 @@ pod "Feedlinx"
 
 ## Author
 
-hirano_tomoya, cromteria@gmail.com
+http://twitter.com/noppefoxwolf
 
 ## License
 
