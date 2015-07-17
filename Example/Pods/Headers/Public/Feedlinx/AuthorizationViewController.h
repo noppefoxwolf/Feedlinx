@@ -1,0 +1,1 @@
+../../../../../Pod/Classes/Authorizer/AuthorizationViewController.h

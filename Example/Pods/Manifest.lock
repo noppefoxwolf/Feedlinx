@@ -1,0 +1,20 @@
+PODS:
+  - Expecta (1.0.0)
+  - Feedlinx (0.1.0)
+  - Specta (1.0.2)
+
+DEPENDENCIES:
+  - Expecta
+  - Feedlinx (from `../`)
+  - Specta
+
+EXTERNAL SOURCES:
+  Feedlinx:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Expecta: 32604574add2c46a36f8d2f716b6c5736eb75024
+  Feedlinx: 803c22592eae006124f1440ef919ef68ee42c4ba
+  Specta: 9cec98310dca411f7c7ffd6943552b501622abfe
+
+COCOAPODS: 0.38.0.beta.2

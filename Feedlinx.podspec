@@ -10,19 +10,16 @@
 Pod::Spec.new do |s|
   s.name             = "Feedlinx"
   s.version          = "0.1.0"
-  s.summary          = "A short description of Feedlinx."
+  s.summary          = "Feedly API Library for iOS."
   s.description      = <<-DESC
-                       An optional longer description of Feedlinx
-
-                       * Markdown format.
-                       * Don't worry about the indent, we strip it!
+			#Feedly API Library for iOS.
                        DESC
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/Feedlinx"
+  s.homepage         = "https://github.com/noppefoxwolf/Feedlinx"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'MIT'
   s.author           = { "hirano_tomoya" => "cromteria@gmail.com" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/Feedlinx.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.source           = { :git => "https://github.com/noppefoxwolf/Feedlinx.git", :tag => s.version.to_s }
+  # s.social_media_url = 'https://twitter.com/noppefoxwolf'
 
   s.platform     = :ios, '7.0'
   s.requires_arc = true

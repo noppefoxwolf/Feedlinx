@@ -1,0 +1,6 @@
+framework module Pods_Feedlinx_Example {
+  umbrella header "Pods-Feedlinx_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}
