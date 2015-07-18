@@ -35,11 +35,15 @@
                    params:(NSDictionary*)params
                   successBlock:(void(^)(NSData*data))success
                   failuerBlock:(void(^)(NSError*error))failure{
-    NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
-    [req setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [req setHTTPMethod:@"GET"];
-    [req addValue:_account.access_token forHTTPHeaderField:@"Authorization"];
-    [NSURLConnection sendAsynchronousRequest:req
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPMethod:@"GET"];
+    [request addValue:_account.access_token forHTTPHeaderField:@"Authorization"];
+    NSError *error = nil;
+    NSData  *data = [NSJSONSerialization dataWithJSONObject:params options:2 error:&error];
+    NSString *content = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+    [request setHTTPBody:[content dataUsingEncoding:NSUTF8StringEncoding]];
+    [NSURLConnection sendAsynchronousRequest:request
                                        queue:[NSOperationQueue mainQueue]
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
                                if (data) {
