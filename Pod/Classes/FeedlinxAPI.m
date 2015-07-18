@@ -213,7 +213,7 @@
                             errorBlock:(void (^)(NSError *error))errorBlock{
     NSString*url = [NSString stringWithFormat:@"%@%@",kOauth2ClientBaseUrl,kAPIMarkersCounts];
     NSMutableDictionary*params = [NSMutableDictionary dictionary];
-    [params setObject:autoRefresh?@1:@0 forKey:@"autoRefresh"];
+    [params setObject:autoRefresh?@"true":@"false" forKey:@"autoRefresh"];
     if (newerThan) [params setObject:newerThan forKey:@"newerThan"];
     if (streamId) [params setObject:streamId forKey:@"streamId"];
     
@@ -264,10 +264,10 @@
     NSString*url = [NSString stringWithFormat:@"%@%@/%@/contents",kOauth2ClientBaseUrl,kAPIMixes,encodeString];
     NSMutableDictionary*params = [NSMutableDictionary dictionary];
     if (count) [params setObject:count forKey:@"count"];
-    [params setObject:unreadOnly?@1:@0 forKey:@"unreadOnly"];
+    [params setObject:unreadOnly?@"true":@"false" forKey:@"unreadOnly"];
     if (hours) [params setObject:hours forKey:@"hours"];
     if (newerThan) [params setObject:newerThan forKey:@"newerThan"];
-    [params setObject:backfill?@1:@0 forKey:@"backfill"];
+    [params setObject:backfill?@"true":@"false" forKey:@"backfill"];
     if (locale) [params setObject:locale forKey:@"locale"];
     
     [self getRequestWithUrl:url
@@ -426,7 +426,7 @@
     NSMutableDictionary*params = [NSMutableDictionary dictionary];
     if (count) [params setObject:count forKey:@"count"];
     if (ranked) [params setObject:ranked forKey:@"ranked"];
-    [params setObject:unreadOnly?@1:@0 forKey:@"unreadOnly"];
+    [params setObject:unreadOnly?@"true":@"false" forKey:@"unreadOnly"];
     if (newerThan) [params setObject:newerThan forKey:@"newerThan"];
     if (continuation) [params setObject:continuation forKey:@"continuation"];
     [self getRequestWithUrl:url
@@ -461,7 +461,7 @@
     NSMutableDictionary*params = [NSMutableDictionary dictionary];
     if (count) [params setObject:count forKey:@"count"];
     if (ranked) [params setObject:ranked forKey:@"ranked"];
-    [params setObject:unreadOnly?@1:@0 forKey:@"unreadOnly"];
+    [params setObject:unreadOnly?@"true":@"false" forKey:@"unreadOnly"];
     if (newerThan) [params setObject:newerThan forKey:@"newerThan"];
     if (continuation) [params setObject:continuation forKey:@"continuation"];
     [self getRequestWithUrl:url
