@@ -46,11 +46,24 @@
 
 - (void)testAPI:(FDXAccount*)account{
     FeedlinxAPI*feedly = [FeedlinxAPI feedryAPIWithAccount:account];
-    [feedly getSubscriptionsWithSuccessBlock:^(NSArray *result) {
-        NSLog(@"%@",result);
-    } errorBlock:^(NSError *error) {
-        
-    }];
+    NSString*stream = [NSString stringWithFormat:@"user/%@/category/global.all",account.account_id];
+    [feedly getStreamContentWithStreamId:stream
+                                   count:@"1"
+                                  ranked:nil
+                              unreadOnly:true
+                               newerThan:nil
+                            continuation:nil
+                            SuccessBlock:^(NSDictionary *stream) {
+                                NSLog(@"%@",stream[@"items"][0]);
+                               [feedly postMarkArticlesAsReadWithEntryIds:@[stream[@"items"][0][@"id"]]
+                                                             SuccessBlock:^{
+                                                                 
+                                                             } errorBlock:^(NSError *error) {
+                                                                 
+                                                             }];
+                            } errorBlock:^(NSError *error) {
+                                
+                            }];
 }
 
 #pragma mark - AuthorizationViewControllerDelegate

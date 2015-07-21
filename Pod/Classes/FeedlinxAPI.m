@@ -33,7 +33,7 @@
 
 - (void)getRequestWithUrl:(NSString*)url
                    params:(NSDictionary*)params
-                  successBlock:(void(^)(NSData*data))success
+                  successBlock:(void(^)(NSURLResponse *response,NSData*data))success
                   failuerBlock:(void(^)(NSError*error))failure{
     NSURLComponents *components = [[NSURLComponents alloc] initWithString:url];
     NSMutableArray*queryItems = [NSMutableArray array];
@@ -50,15 +50,17 @@
                                        queue:[NSOperationQueue mainQueue]
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
                                if (data) {
-                                   success(data);
+                                   success(response,data);
+                               }else{
+                                   failure(error);
                                }
-                               failure(error);
+                               
                            }];
 }
 
 - (void)postRequestWithUrl:(NSString*)url
                    params:(NSDictionary*)params
-             successBlock:(void(^)(NSData*data))success
+             successBlock:(void(^)(NSURLResponse *response,NSData*data))success
              failuerBlock:(void(^)(NSError*error))failure{
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -72,15 +74,16 @@
                                        queue:[NSOperationQueue mainQueue]
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
                                if (data) {
-                                   success(data);
+                                   success(response,data);
+                               }else{
+                                   failure(error);
                                }
-                               failure(error);
                            }];
 }
 
 - (void)deleteRequestWithUrl:(NSString*)url
                     params:(NSDictionary*)params
-              successBlock:(void(^)(NSData*data))success
+              successBlock:(void(^)(NSURLResponse *response,NSData*data))success
               failuerBlock:(void(^)(NSError*error))failure{
     NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     [req setHTTPMethod:@"DELETE"];
@@ -89,9 +92,10 @@
                                        queue:[NSOperationQueue mainQueue]
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
                                if (data) {
-                                   success(data);
+                                   success(response,data);
+                               }else{
+                                   failure(error);
                                }
-                               failure(error);
                            }];
 }
 #pragma mark - API
@@ -107,7 +111,7 @@
     NSString*url = [NSString stringWithFormat:@"%@%@",kOauth2ClientBaseUrl,kAPICategories];
     [self getRequestWithUrl:url
                      params:nil
-               successBlock:^(NSData *data) {
+               successBlock:^(NSURLResponse *response,NSData *data) {
                    NSError*error = nil;
                    NSArray*categories = [NSJSONSerialization JSONObjectWithData:data
                                                                           options:0
@@ -127,7 +131,7 @@
     NSString*url = [NSString stringWithFormat:@"%@%@/%@",kOauth2ClientBaseUrl,kAPICategories,encodeString];
     [self postRequestWithUrl:url
                       params:@{@"label":label}
-               successBlock:^(NSData *data) {
+               successBlock:^(NSURLResponse *response,NSData *data) {
                    NSError*error = nil;
                    NSArray*categories = [NSJSONSerialization JSONObjectWithData:data
                                                                         options:0
@@ -150,7 +154,7 @@
     NSString*url = [NSString stringWithFormat:@"%@%@/%@",kOauth2ClientBaseUrl,kAPICategories,encodeString];
     [self deleteRequestWithUrl:url
                         params:nil
-                  successBlock:^(NSData *data) {
+                  successBlock:^(NSURLResponse *response,NSData *data) {
                       successBlock();
                   } failuerBlock:^(NSError *error) {
                       errorBlock(error);
@@ -173,7 +177,7 @@
     NSLog(@"%@",url);
     [self getRequestWithUrl:url
                      params:nil
-               successBlock:^(NSData *data) {
+               successBlock:^(NSURLResponse *response,NSData *data) {
                    NSError*error = nil;
                    NSDictionary*result = [NSJSONSerialization JSONObjectWithData:data
                                                                          options:0
@@ -219,7 +223,7 @@
     
     [self getRequestWithUrl:url
                      params:params
-               successBlock:^(NSData *data) {
+               successBlock:^(NSURLResponse *response,NSData *data) {
                    NSError*error = nil;
                    NSDictionary*markersCount = [NSJSONSerialization JSONObjectWithData:data
                                                                         options:0
@@ -234,9 +238,80 @@
                }];
 }
 /**Mark one or multiple articles as read*/
+- (void)postMarkArticlesAsReadWithEntryIds:(NSArray *)entryIds
+                              SuccessBlock:(void (^)())successBlock
+                                errorBlock:(void (^)(NSError *))errorBlock{
+    NSString*url = [NSString stringWithFormat:@"%@%@",kOauth2ClientBaseUrl,kAPIMarkers];
+    NSMutableDictionary*params = [NSMutableDictionary dictionary];
+    [params setObject:@"markAsRead" forKey:@"action"];
+    [params setObject:@"entries" forKey:@"type"];
+    [params setObject:entryIds forKey:@"entryIds"];
+    [self postRequestWithUrl:url
+                     params:params
+               successBlock:^(NSURLResponse *response,NSData *data) {
+                   successBlock();
+               } failuerBlock:^(NSError*error) {
+                   errorBlock(error);
+               }];
+}
+
 /**Keep one or multiple articles as unread*/
+- (void)postMarkArticlesAsUnReadWithEntryIds:(NSArray *)entryIds
+                              SuccessBlock:(void (^)())successBlock
+                                errorBlock:(void (^)(NSError *))errorBlock{
+    NSString*url = [NSString stringWithFormat:@"%@%@",kOauth2ClientBaseUrl,kAPIMarkers];
+    NSMutableDictionary*params = [NSMutableDictionary dictionary];
+    [params setObject:@"keepUnread" forKey:@"action"];
+    [params setObject:@"entries" forKey:@"type"];
+    [params setObject:entryIds forKey:@"entryIds"];
+    [self postRequestWithUrl:url
+                      params:params
+                successBlock:^(NSURLResponse *response,NSData *data) {
+                    successBlock();
+                } failuerBlock:^(NSError*error) {
+                    errorBlock(error);
+                }];
+}
 /**Mark a feed as read*/
+- (void)postMarkFeedsAsReadWithFeedIds:(NSArray *)feedIds
+                       lastReadEntryId:(NSString*)lastReadEntryId
+                           SuccessBlock:(void (^)())successBlock
+                             errorBlock:(void (^)(NSError *))errorBlock{
+    NSString*url = [NSString stringWithFormat:@"%@%@",kOauth2ClientBaseUrl,kAPIMarkers];
+    NSMutableDictionary*params = [NSMutableDictionary dictionary];
+    [params setObject:@"markAsRead" forKey:@"action"];
+    [params setObject:@"feeds" forKey:@"type"];
+    if (lastReadEntryId) [params setObject:lastReadEntryId forKey:@"lastReadEntryId"];
+    [params setObject:feedIds forKey:@"feedIds"];
+    
+    [self postRequestWithUrl:url
+                      params:params
+                successBlock:^(NSURLResponse *response,NSData *data) {
+                    successBlock();
+                } failuerBlock:^(NSError*error) {
+                    errorBlock(error);
+                }];
+}
 /**Mark a category as read*/
+- (void)postMarkCategoriesAsReadWithCategoryIds:(NSArray *)categoryIds
+                                lastReadEntryId:(NSString *)lastReadEntryId
+                                   SuccessBlock:(void (^)())successBlock
+                                     errorBlock:(void (^)(NSError *))errorBlock{
+    NSString*url = [NSString stringWithFormat:@"%@%@",kOauth2ClientBaseUrl,kAPIMarkers];
+    NSMutableDictionary*params = [NSMutableDictionary dictionary];
+    [params setObject:@"markAsRead" forKey:@"action"];
+    [params setObject:@"categories" forKey:@"type"];
+    if (lastReadEntryId) [params setObject:lastReadEntryId forKey:@"lastReadEntryId"];
+    [params setObject:categoryIds forKey:@"categoryIds"];
+    
+    [self postRequestWithUrl:url
+                      params:params
+                successBlock:^(NSURLResponse *response,NSData *data) {
+                    successBlock();
+                } failuerBlock:^(NSError*error) {
+                    errorBlock(error);
+                }];
+}
 /**Undo mark as read*/
 /**Mark one or multiple articles as saved*/
 /**Mark one or multiple articles as unsaved*/
@@ -272,7 +347,7 @@
     
     [self getRequestWithUrl:url
                      params:params
-               successBlock:^(NSData *data) {
+               successBlock:^(NSURLResponse *response,NSData *data) {
                    NSError*error = nil;
                    NSDictionary*result = [NSJSONSerialization JSONObjectWithData:data
                                                                          options:0
@@ -294,7 +369,7 @@
     NSString*url = [NSString stringWithFormat:@"%@%@",kOauth2ClientBaseUrl,kAPIOPML];
     [self getRequestWithUrl:url
                      params:nil
-               successBlock:^(NSData *data) {
+               successBlock:^(NSURLResponse *response,NSData *data) {
                    NSString*xmlString = [[NSString alloc] initWithData:data
                                                               encoding:NSUTF8StringEncoding];
                    successBlock(xmlString);
@@ -362,7 +437,7 @@
     NSString*url = [NSString stringWithFormat:@"%@%@",kOauth2ClientBaseUrl,kAPIProfile];
     [self getRequestWithUrl:url
                      params:nil
-               successBlock:^(NSData *data) {
+               successBlock:^(NSURLResponse *response,NSData *data) {
                    NSError*error = nil;
                    NSDictionary*profile = [NSJSONSerialization JSONObjectWithData:data
                                                                           options:0
@@ -394,7 +469,7 @@
     NSString*url = [NSString stringWithFormat:@"%@%@/%@",kOauth2ClientBaseUrl,kAPIShortenEntries,encodeString];
     [self getRequestWithUrl:url
                      params:nil
-               successBlock:^(NSData *data) {
+               successBlock:^(NSURLResponse *response,NSData *data) {
                    NSError*error = nil;
                    NSDictionary*result = [NSJSONSerialization JSONObjectWithData:data
                                                                          options:0
@@ -431,7 +506,7 @@
     if (continuation) [params setObject:continuation forKey:@"continuation"];
     [self getRequestWithUrl:url
                      params:params
-               successBlock:^(NSData *data) {
+               successBlock:^(NSURLResponse *response,NSData *data) {
                    NSError*error = nil;
                    NSDictionary*result = [NSJSONSerialization JSONObjectWithData:data
                                                                           options:0
@@ -466,7 +541,7 @@
     if (continuation) [params setObject:continuation forKey:@"continuation"];
     [self getRequestWithUrl:url
                      params:params
-               successBlock:^(NSData *data) {
+               successBlock:^(NSURLResponse *response,NSData *data) {
                    NSError*error = nil;
                    NSDictionary*profile = [NSJSONSerialization JSONObjectWithData:data
                                                                           options:0
@@ -489,7 +564,7 @@
     NSString*url = [NSString stringWithFormat:@"%@%@",kOauth2ClientBaseUrl,kAPISubscriptions];
     [self getRequestWithUrl:url
                      params:nil
-               successBlock:^(NSData *data) {
+               successBlock:^(NSURLResponse *response,NSData *data) {
                    NSError*error = nil;
                    NSArray*res = [NSJSONSerialization JSONObjectWithData:data
                                                                  options:0
@@ -531,7 +606,21 @@
 #pragma mark - Twitter
 //https://developer.feedly.com/v3/twitter/
 /**Link Twitter account*/
-
+//非実装
+//- (void)getLinktwitterAccountWithRedirectUri:(NSString*)redirectUri
+//                                SuccessBlock:(void (^)(NSArray *))successBlock
+//                                  errorBlock:(void (^)(NSError *))errorBlock{
+//    NSString*url = [NSString stringWithFormat:@"%@%@",kOauth2ClientBaseUrl,kAPITwitterAuth];
+//    [self getRequestWithUrl:url
+//                     params:@{@"redirectUri":redirectUri}
+//               successBlock:^(NSURLResponse *response,NSData *data) {
+//                   NSLog(@"%@",response.URL.absoluteString);
+//                   if ([(NSHTTPURLResponse*)response statusCode]!=200) {
+//                   }else{
+//                   }
+//               } failuerBlock:^(NSError*error) {
+//               }];
+//}
 /**Unlink Twitter account*/
 
 /**Get suggested feeds*/

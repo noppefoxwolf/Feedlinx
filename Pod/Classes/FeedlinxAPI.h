@@ -28,6 +28,8 @@ static NSString * const kOauth2ClientTokenUrl = @"/v3/auth/token";
 static NSString * const kAPICategories = @"/v3/categories";
 //markers/counts
 static NSString * const kAPIMarkersCounts = @"/v3/markers/counts";
+//markers
+static NSString * const kAPIMarkers = @"/v3/markers";
 ///v3/opml
 static NSString * const kAPIOPML = @"/v3/opml";
 ///v3/feeds/
@@ -46,6 +48,8 @@ static NSString * const kAPIMixes = @"/v3/mixes";
 static NSString * const kAPISubscriptions = @"/v3/subscriptions";
 //scope url
 static NSString * const kOauth2ClientScopeUrl = @"https://cloud.feedly.com/subscriptions";
+///v3/twitter/auth
+static NSString * const kAPITwitterAuth = @"/v3/twitter/auth";
 
 @interface FeedlinxAPI : NSObject
 + (instancetype)feedryAPIWithAccount:(FDXAccount*)account;
@@ -110,11 +114,27 @@ static NSString * const kOauth2ClientScopeUrl = @"https://cloud.feedly.com/subsc
                               streamId:(NSString*)streamId
                          SuccessBlock:(void(^)(NSDictionary*markersCount))successBlock
                            errorBlock:(void(^)(NSError *error))errorBlock;
+//実装検証済み
 /**Mark one or multiple articles as read*/
+- (void)postMarkArticlesAsReadWithEntryIds:(NSArray*)entryIds
+                              SuccessBlock:(void(^)())successBlock
+                                errorBlock:(void(^)(NSError *error))errorBlock;
 /**Keep one or multiple articles as unread*/
+- (void)postMarkArticlesAsUnReadWithEntryIds:(NSArray*)entryIds
+                                SuccessBlock:(void(^)())successBlock
+                                  errorBlock:(void(^)(NSError *error))errorBlock;
 /**Mark a feed as read*/
+- (void)postMarkFeedsAsReadWithFeedIds:(NSArray*)feedIds
+                       lastReadEntryId:(NSString*)lastReadEntryId
+                           SuccessBlock:(void(^)())successBlock
+                             errorBlock:(void(^)(NSError *error))errorBlock;
 /**Mark a category as read*/
+- (void)postMarkCategoriesAsReadWithCategoryIds:(NSArray*)categoryIds
+                                lastReadEntryId:(NSString*)lastReadEntryId
+                                   SuccessBlock:(void(^)())successBlock
+                                     errorBlock:(void(^)(NSError *error))errorBlock;
 /**Undo mark as read*/
+
 /**Mark one or multiple articles as saved*/
 /**Mark one or multiple articles as unsaved*/
 /**Get the latest read operations (to sync local cache)*/
@@ -231,7 +251,10 @@ static NSString * const kOauth2ClientScopeUrl = @"https://cloud.feedly.com/subsc
 #pragma mark - Twitter
 //https://developer.feedly.com/v3/twitter/
 /**Link Twitter account*/
-
+//非実装
+//- (void)getLinktwitterAccountWithRedirectUri:(NSString*)redirectUri
+//                                SuccessBlock:(void (^)(NSArray *))successBlock
+//                                  errorBlock:(void (^)(NSError *))errorBlock;
 /**Unlink Twitter account*/
 
 /**Get suggested feeds*/
