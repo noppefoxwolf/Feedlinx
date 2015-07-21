@@ -18,5 +18,8 @@
 @end
 
 @interface AuthorizationViewController : UIViewController
+- (instancetype)initWithScope:(NSString *)scope
+                     clientId:(NSString *)cid
+                 clientSecret:(NSString *)csecret;
 @property (nonatomic,assign)id<AuthorizationViewControllerDelegate>delegate;
 @end

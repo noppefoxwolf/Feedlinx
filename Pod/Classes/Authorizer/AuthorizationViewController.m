@@ -12,9 +12,25 @@
 @interface AuthorizationViewController ()<UIWebViewDelegate,FDXOauth2Delegate>
 @property UIWebView*webView;
 @property FDXOauth2*oauth;
+
+@property NSString*scope;
+@property NSString*cid;
+@property NSString*csecret;
 @end
 
 @implementation AuthorizationViewController
+
+- (instancetype)initWithScope:(NSString*)scope
+                     clientId:(NSString *)cid
+                 clientSecret:(NSString *)csecret{
+    self = [super init];
+    if (self) {
+        self.scope = scope;
+        self.cid   = cid;
+        self.csecret = csecret;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -22,9 +38,9 @@
     self.webView.delegate = self;
     [self.view addSubview:self.webView];
     
-    self.oauth = [[FDXOauth2 alloc] initWithScope:@"https://sandbox.feedly.com"
-                                         clientId:@"sandbox"
-                                     clientSecret:@"A4143F56J75FGQY7TAJM"];
+    self.oauth = [[FDXOauth2 alloc] initWithScope:self.scope
+                                         clientId:self.cid
+                                     clientSecret:self.csecret];
     self.oauth.delegate = self;
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.oauth.authorizationURL]];
     
