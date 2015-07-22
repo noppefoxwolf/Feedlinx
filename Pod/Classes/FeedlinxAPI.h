@@ -30,6 +30,10 @@ static NSString * const kAPICategories = @"/v3/categories";
 static NSString * const kAPIMarkersCounts = @"/v3/markers/counts";
 //markers
 static NSString * const kAPIMarkers = @"/v3/markers";
+///v3/markers/reads
+static NSString * const kAPIMarkersReads = @"/v3/markers/reads";
+///v3/markers/tags
+static NSString * const kAPIMarkersTags = @"/v3/markers/tags";
 ///v3/opml
 static NSString * const kAPIOPML = @"/v3/opml";
 ///v3/feeds/
@@ -134,11 +138,26 @@ static NSString * const kAPITwitterAuth = @"/v3/twitter/auth";
                                    SuccessBlock:(void(^)())successBlock
                                      errorBlock:(void(^)(NSError *error))errorBlock;
 /**Undo mark as read*/
-
+- (void)postUndoMarkAsReadWithType:(NSString*)type
+                               Ids:(NSArray*)ids
+                      SuccessBlock:(void(^)())successBlock
+                        errorBlock:(void(^)(NSError *error))errorBlock;
 /**Mark one or multiple articles as saved*/
+- (void)postMarkArticlesAsSaveWithEntryIds:(NSArray *)entryIds
+                              SuccessBlock:(void (^)())successBlock
+                                errorBlock:(void (^)(NSError *))errorBlock;
 /**Mark one or multiple articles as unsaved*/
+- (void)postMarkArticlesAsUnSaveWithEntryIds:(NSArray *)entryIds
+                              SuccessBlock:(void (^)())successBlock
+                                errorBlock:(void (^)(NSError *error))errorBlock;
 /**Get the latest read operations (to sync local cache)*/
+- (void)getLatestReadWithNewerThan:(NSString*)newerThan
+                      SuccessBlock:(void (^)(NSDictionary*result))successBlock
+                        errorBlock:(void (^)(NSError *error))errorBlock;
 /**Get the latest tagged entry ids*/
+- (void)getLatestTaggedEntryIdsWithNewerThan:(NSString*)newerThan
+                                SuccessBlock:(void (^)(NSDictionary*result))successBlock
+                                  errorBlock:(void (^)(NSError *error))errorBlock;
 #pragma mark - Microsoft
 //https://developer.feedly.com/v3/microsoft/
 /**Link Microsoft Account*/

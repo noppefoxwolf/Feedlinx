@@ -313,10 +313,115 @@
                 }];
 }
 /**Undo mark as read*/
+- (void)postUndoMarkAsReadWithType:(NSString *)type
+                               Ids:(NSArray *)ids
+                      SuccessBlock:(void (^)())successBlock
+                        errorBlock:(void (^)(NSError *))errorBlock{
+    NSString*url = [NSString stringWithFormat:@"%@%@",kOauth2ClientBaseUrl,kAPIMarkers];
+    NSMutableDictionary*params = [NSMutableDictionary dictionary];
+    [params setObject:@"undoMarkAsRead" forKey:@"action"];
+    [params setObject:type forKey:@"type"];
+    NSString*idsKey = nil;
+    if ([type hasPrefix:@"categories"]) {
+        idsKey = @"categoryIds";
+    }else if ([type hasPrefix:@"feeds"]){
+        idsKey = @"feedIds";
+    }
+    if (idsKey) {
+        [params setObject:ids forKey:idsKey];
+    }
+    [self postRequestWithUrl:url
+                      params:params
+                successBlock:^(NSURLResponse *response,NSData *data) {
+                    successBlock();
+                } failuerBlock:^(NSError*error) {
+                    errorBlock(error);
+                }];
+
+}
+
 /**Mark one or multiple articles as saved*/
+- (void)postMarkArticlesAsSaveWithEntryIds:(NSArray *)entryIds
+                              SuccessBlock:(void (^)())successBlock
+                                errorBlock:(void (^)(NSError *))errorBlock{
+    NSString*url = [NSString stringWithFormat:@"%@%@",kOauth2ClientBaseUrl,kAPIMarkers];
+    NSMutableDictionary*params = [NSMutableDictionary dictionary];
+    [params setObject:@"markAsSaved" forKey:@"action"];
+    [params setObject:@"entries" forKey:@"type"];
+    [params setObject:entryIds forKey:@"entryIds"];
+    [self postRequestWithUrl:url
+                      params:params
+                successBlock:^(NSURLResponse *response,NSData *data) {
+                    successBlock();
+                } failuerBlock:^(NSError*error) {
+                    errorBlock(error);
+                }];
+}
 /**Mark one or multiple articles as unsaved*/
+- (void)postMarkArticlesAsUnSaveWithEntryIds:(NSArray *)entryIds
+                              SuccessBlock:(void (^)())successBlock
+                                errorBlock:(void (^)(NSError *))errorBlock{
+    NSString*url = [NSString stringWithFormat:@"%@%@",kOauth2ClientBaseUrl,kAPIMarkers];
+    NSMutableDictionary*params = [NSMutableDictionary dictionary];
+    [params setObject:@"markAsSaved" forKey:@"action"];
+    [params setObject:@"entries" forKey:@"type"];
+    [params setObject:entryIds forKey:@"entryIds"];
+    [self postRequestWithUrl:url
+                      params:params
+                successBlock:^(NSURLResponse *response,NSData *data) {
+                    successBlock();
+                } failuerBlock:^(NSError*error) {
+                    errorBlock(error);
+                }];
+}
 /**Get the latest read operations (to sync local cache)*/
+- (void)getLatestReadWithNewerThan:(NSString *)newerThan
+                      SuccessBlock:(void (^)(NSDictionary*result))successBlock
+                        errorBlock:(void (^)(NSError *))errorBlock{
+    NSString*url = [NSString stringWithFormat:@"%@%@",kOauth2ClientBaseUrl,kAPIMarkers];
+    NSMutableDictionary*params = [NSMutableDictionary dictionary];
+    [params setObject:newerThan forKey:@"newerThan"];
+    [self getRequestWithUrl:url
+                     params:params
+               successBlock:^(NSURLResponse *response, NSData *data) {
+                   NSError*error = nil;
+                   NSDictionary*result = [NSJSONSerialization JSONObjectWithData:data
+                                                                         options:0
+                                                                           error:&error];
+                   if (error) {
+                       errorBlock(error);
+                   }else{
+                       successBlock(result);
+                   }
+               } failuerBlock:^(NSError *error) {
+                   errorBlock(error);
+               }];
+}
 /**Get the latest tagged entry ids*/
+- (void)getLatestTaggedEntryIdsWithNewerThan:(NSString *)newerThan
+                                SuccessBlock:(void (^)(NSDictionary*result))successBlock
+                                  errorBlock:(void (^)(NSError *))errorBlock{
+    NSString*url = [NSString stringWithFormat:@"%@%@",kOauth2ClientBaseUrl,kAPIMarkersTags];
+    NSMutableDictionary*params = [NSMutableDictionary dictionary];
+    [params setObject:newerThan forKey:@"newerThan"];
+    [self getRequestWithUrl:url
+                     params:params
+               successBlock:^(NSURLResponse *response, NSData *data) {
+                   NSError*error = nil;
+                   NSDictionary*result = [NSJSONSerialization JSONObjectWithData:data
+                                                                         options:0
+                                                                           error:&error];
+                   if (error) {
+                       errorBlock(error);
+                   }else{
+                       successBlock(result);
+                   }
+               } failuerBlock:^(NSError *error) {
+                   errorBlock(error);
+               }];
+}
+
+
 #pragma mark - Microsoft
 //https://developer.feedly.com/v3/microsoft/
 /**Link Microsoft Account*/
