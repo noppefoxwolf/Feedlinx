@@ -34,6 +34,8 @@ static NSString * const kAPIMarkers = @"/v3/markers";
 static NSString * const kAPIMarkersReads = @"/v3/markers/reads";
 ///v3/markers/tags
 static NSString * const kAPIMarkersTags = @"/v3/markers/tags";
+///v3/tags
+static NSString * const kAPITags = @"/v3/tags";
 ///v3/opml
 static NSString * const kAPIOPML = @"/v3/opml";
 ///v3/feeds/
@@ -256,16 +258,33 @@ static NSString * const kAPITwitterAuth = @"/v3/twitter/auth";
 #pragma mark - Tags
 //https://developer.feedly.com/v3/tags/
 /**Get the list of tags created by the user.*/
-
+- (void)getListOfTagsByUserWithSuccessBlock:(void(^)(NSArray *result))successBlock
+                                 errorBlock:(void(^)(NSError *error))errorBlock;
 /**Tag an existing entry*/
+- (void)putTagExistingEntryWithEntryId:(NSString*)entryId
+                          SuccessBlock:(void(^)())successBlock
+                            errorBlock:(void(^)(NSError *error))errorBlock;
 
 /**Tag multiple entries*/
-
+- (void)putTagExistingEntryWithTagIds:(NSArray*)tagIds
+                              entryId:(NSString *)entryId
+                         SuccessBlock:(void (^)())successBlock
+                           errorBlock:(void (^)(NSError *))errorBlock;
 /**Change a tag label*/
-
+- (void)postChangeTagLabelWithTagId:(NSString*)tagId
+                              label:(NSString*)label
+                       SuccessBlock:(void (^)())successBlock
+                         errorBlock:(void (^)(NSError *))errorBlock;
 /**Untag multiple entries*/
+- (void)deleteUntagTagIds:(NSArray*)tagIds
+               entryIds:(NSArray*)entryIds
+           SuccessBlock:(void (^)())successBlock
+             errorBlock:(void (^)(NSError *))errorBlock;
 
 /**Delete tags*/
+- (void)deleteTagsWithTagIds:(NSArray*)tagIds
+                successBlock:(void (^)())successBlock
+                  errorBlock:(void (^)(NSError *))errorBlock;
 
 #pragma mark - Twitter
 //https://developer.feedly.com/v3/twitter/

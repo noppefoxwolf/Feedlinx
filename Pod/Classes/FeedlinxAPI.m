@@ -98,6 +98,24 @@
                                }
                            }];
 }
+
+- (void)putRequestWithUrl:(NSString*)url
+                   params:(NSDictionary*)params
+             successBlock:(void(^)(NSURLResponse *response,NSData*data))success
+             failuerBlock:(void(^)(NSError*error))failure{
+    NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+    [req setHTTPMethod:@"PUT"];
+    [req addValue:_account.access_token forHTTPHeaderField:@"Authorization"];
+    [NSURLConnection sendAsynchronousRequest:req
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                               if (data) {
+                                   success(response,data);
+                               }else{
+                                   failure(error);
+                               }
+                           }];
+}
 #pragma mark - API
 
 #pragma mark - Authentication
@@ -697,16 +715,122 @@
 #pragma mark - Tags
 //https://developer.feedly.com/v3/tags/
 /**Get the list of tags created by the user.*/
+- (void)getListOfTagsByUserWithSuccessBlock:(void (^)(NSArray *))successBlock
+                                 errorBlock:(void (^)(NSError *))errorBlock{
+    NSString*url = [NSString stringWithFormat:@"%@%@",kOauth2ClientBaseUrl,kAPITags];
+    [self getRequestWithUrl:url
+                     params:nil
+               successBlock:^(NSURLResponse *response,NSData *data) {
+                   NSError*error = nil;
+                   NSArray*res = [NSJSONSerialization JSONObjectWithData:data
+                                                                 options:0
+                                                                   error:&error];
+                   if (error) {
+                       errorBlock(error);
+                   }else{
+                       successBlock(res);
+                   }
+               } failuerBlock:^(NSError*error) {
+                   errorBlock(error);
+               }];
+}
 
 /**Tag an existing entry*/
+- (void)putTagExistingEntryWithTagIds:(NSArray*)tagIds
+                             entryId:(NSString *)entryId
+                          SuccessBlock:(void (^)())successBlock
+                            errorBlock:(void (^)(NSError *))errorBlock{
+    NSMutableString*url = [NSMutableString stringWithFormat:@"%@%@/",kOauth2ClientBaseUrl,kAPITags];
+    for (NSString*tagId in tagIds) {
+        [url appendString:tagId];
+        [url appendString:@","];
+    }
+    NSMutableDictionary*params = [NSMutableDictionary dictionary];
+    [params setObject:entryId forKey:@"entryId"];
+    [self putRequestWithUrl:url
+                     params:params
+               successBlock:^(NSURLResponse *response, NSData *data) {
+                   successBlock();
+               } failuerBlock:^(NSError *error) {
+                   errorBlock(error);
+               }];
+}
 
 /**Tag multiple entries*/
+- (void)putTagExistingEntryWithTagIds:(NSArray*)tagIds
+                             entryIds:(NSArray *)entryIds
+                         SuccessBlock:(void (^)())successBlock
+                           errorBlock:(void (^)(NSError *))errorBlock{
+    NSMutableString*url = [NSMutableString stringWithFormat:@"%@%@/",kOauth2ClientBaseUrl,kAPITags];
+    for (NSString*tagId in tagIds) {
+        [url appendString:tagId];
+        [url appendString:@","];
+    }
+    NSMutableDictionary*params = [NSMutableDictionary dictionary];
+    [params setObject:entryIds forKey:@"entryIds"];
+    [self putRequestWithUrl:url
+                     params:params
+               successBlock:^(NSURLResponse *response, NSData *data) {
+                   successBlock();
+               } failuerBlock:^(NSError *error) {
+                   errorBlock(error);
+               }];
+}
 
 /**Change a tag label*/
+- (void)postChangeTagLabelWithTagId:(NSString *)tagId
+                              label:(NSString *)label
+                       SuccessBlock:(void (^)())successBlock
+                         errorBlock:(void (^)(NSError *))errorBlock{
+    NSString*url = [NSString stringWithFormat:@"%@%@/%@",kOauth2ClientBaseUrl,kAPITags,tagId];
+    NSMutableDictionary*params = [NSMutableDictionary dictionary];
+    [params setObject:label forKey:@"label"];
+    [self postRequestWithUrl:url
+                      params:params
+                successBlock:^(NSURLResponse *response, NSData *data) {
+                    successBlock();
+                } failuerBlock:^(NSError *error) {
+                    errorBlock(error);
+                }];
+}
 
 /**Untag multiple entries*/
+- (void)deleteUntagTagIds:(NSArray *)tagIds
+               entryIds:(NSArray *)entryIds
+           SuccessBlock:(void (^)())successBlock
+             errorBlock:(void (^)(NSError *))errorBlock{
+    NSMutableString*url = [NSMutableString stringWithFormat:@"%@%@/",kOauth2ClientBaseUrl,kAPITags];
+    for (NSString*tag in tagIds) {
+        [url appendString:tag];
+        [url appendString:@","];
+    }
+    [url appendString:@"/"];
+    for (NSString*entryId in entryIds) {
+        [url appendString:entryId];
+        [url appendString:@","];
+    }
+    [self deleteRequestWithUrl:url
+                        params:nil
+                  successBlock:^(NSURLResponse *response, NSData *data) {
+                      
+                  } failuerBlock:^(NSError *error) {
+                      
+                  }];
+}
 
 /**Delete tags*/
+- (void)deleteTagsWithTagIds:(NSArray *)tagIds
+                successBlock:(void (^)())successBlock
+                  errorBlock:(void (^)(NSError *))errorBlock{
+    NSMutableString*url = [NSMutableString stringWithFormat:@"%@%@/",kOauth2ClientBaseUrl,kAPITags];
+    [self deleteRequestWithUrl:url
+                        params:nil
+                  successBlock:^(NSURLResponse *response, NSData *data) {
+                      successBlock();
+                  } failuerBlock:^(NSError *error) {
+                      errorBlock(error);
+                  }];
+}
 
 #pragma mark - Twitter
 //https://developer.feedly.com/v3/twitter/
