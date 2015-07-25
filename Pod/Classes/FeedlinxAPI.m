@@ -224,7 +224,30 @@
 #pragma mark - Feeds
 //https://developer.feedly.com/v3/feeds/
 /**Get the metadata about a specific feed*/
+- (void)getFeedMetadataWithFeedId:(NSString *)feedId
+                     SuccessBlock:(void (^)(NSDictionary *))successBlock
+                       errorBlock:(void (^)(NSError *))errorBlock{
+    NSString* encodeString = [feedId stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet alphanumericCharacterSet]];
+    NSString*url = [NSString stringWithFormat:@"%@%@/%@",kOauth2ClientBaseUrl,kAPIFeeds,encodeString];
+    [self getRequestWithUrl:url
+                     params:nil
+               successBlock:^(NSURLResponse *response,NSData *data) {
+                   NSError*error = nil;
+                   NSDictionary*result = [NSJSONSerialization JSONObjectWithData:data
+                                                                               options:0
+                                                                                 error:&error];
+                   if (error) {
+                       errorBlock(error);
+                   }else{
+                       successBlock(result);
+                   }
+               } failuerBlock:^(NSError*error) {
+                   errorBlock(error);
+               }];
+}
 /**Get the metadata for a list of feeds*/
+
+
 #pragma mark - Markers
 //https://developer.feedly.com/v3/markers/
 /**Get the list of unread counts*/
@@ -549,8 +572,47 @@
 #pragma mark - Preferences
 //https://developer.feedly.com/v3/preferences/
 /**Get the preferences of the user*/
+- (void)getPreferencesWithSuccessBlock:(void (^)(NSDictionary *))successBlock
+                            errorBlock:(void (^)(NSError *))errorBlock{
+    NSString*url = [NSString stringWithFormat:@"%@%@",kOauth2ClientBaseUrl,kAPIPreferences];
+    [self getRequestWithUrl:url
+                     params:nil
+               successBlock:^(NSURLResponse *response,NSData *data) {
+                   NSError*error = nil;
+                   NSDictionary*result = [NSJSONSerialization JSONObjectWithData:data
+                                                                          options:0
+                                                                            error:&error];
+                   if (error) {
+                       errorBlock(error);
+                   }else{
+                       successBlock(result);
+                   }
+               } failuerBlock:^(NSError*error) {
+                   errorBlock(error);
+               }];
+}
 
 /**Update the preferences of the user*/
+- (void)postPreferencesWithPreference:(NSDictionary *)preference
+                         successBlock:(void (^)())successBlock
+                           errorBlock:(void (^)(NSError *))errorBlock{
+    NSString*url = [NSString stringWithFormat:@"%@%@",kOauth2ClientBaseUrl,kAPIPreferences];
+    [self getRequestWithUrl:url
+                     params:preference
+               successBlock:^(NSURLResponse *response,NSData *data) {
+                   NSError*error = nil;
+                   NSDictionary*profile = [NSJSONSerialization JSONObjectWithData:data
+                                                                          options:0
+                                                                            error:&error];
+                   if (error) {
+                       errorBlock(error);
+                   }else{
+                       successBlock(profile);
+                   }
+               } failuerBlock:^(NSError*error) {
+                   errorBlock(error);
+               }];
+}
 
 #pragma mark - Profile
 //https://developer.feedly.com/v3/profile/
@@ -575,12 +637,114 @@
                }];
 }
 /**Update the profile of the user*/
+- (void)postProfileWithEmail:(NSString *)email
+                   givenName:(NSString *)givenName
+                  familyName:(NSString *)familyName
+                     picture:(NSString *)picture
+                      gender:(BOOL)gender
+                      locale:(NSString *)locale
+                     twitter:(NSString *)twitter
+                    facebook:(NSString *)facebook
+                successBlock:(void (^)(NSDictionary *))successBlock
+                  errorBlock:(void (^)(NSError *))errorBlock{
+    NSString*url = [NSString stringWithFormat:@"%@%@",kOauth2ClientBaseUrl,kAPIProfile];
+    NSMutableDictionary*params = [NSMutableDictionary dictionary];
+    if (email) [params setObject:email forKey:@"email"];
+    if (givenName) [params setObject:givenName forKey:@"givenName"];
+    if (familyName) [params setObject:familyName forKey:@"familyName"];
+    if (picture) [params setObject:picture forKey:@"picture"];
+    if (gender) [params setObject:gender?@"true":@"false" forKey:@"gender"];
+    if (locale) [params setObject:locale forKey:@"locale"];
+    if (twitter) [params setObject:twitter forKey:@"twitter"];
+    if (facebook) [params setObject:facebook forKey:@"facebook"];
+    
+    [self postRequestWithUrl:url
+                      params:params
+                successBlock:^(NSURLResponse *response, NSData *data) {
+                NSError*error = nil;
+                NSDictionary*result = [NSJSONSerialization JSONObjectWithData:data
+                                                                        options:0
+                                                                        error:&error];
+                if (error) {
+                    errorBlock(error);
+                }else{
+                    successBlock(result);
+                }
+    } failuerBlock:^(NSError *error) {
+        errorBlock(error);
+    }];
+}
 
 #pragma mark - Search
 //https://developer.feedly.com/v3/search/
 /**Find feeds based on title, url or #topic*/
+- (void)getSearchFeedsWithQuery:(NSString*)query
+                          count:(NSString*)count
+                         locale:(NSString*)locale
+                   SuccessBlock:(void (^)(NSDictionary *))successBlock
+                     errorBlock:(void (^)(NSError *))errorBlock{
+    NSString*url = [NSString stringWithFormat:@"%@%@",kOauth2ClientBaseUrl,kAPISearchFeeds];
+    NSMutableDictionary*params = [NSMutableDictionary dictionary];
+    [params setObject:query forKey:@"query"];
+    if (count) [params setObject:count forKey:@"count"];
+    if (locale)[params setObject:locale forKey:@"locale"];
+    [self getRequestWithUrl:url
+                     params:params
+               successBlock:^(NSURLResponse *response, NSData *data) {
+                   NSError*error = nil;
+                   NSDictionary*result = [NSJSONSerialization JSONObjectWithData:data
+                                                                         options:0
+                                                                           error:&error];
+                   if (error) {
+                       errorBlock(error);
+                   }else{
+                       successBlock(result);
+                   }
+               } failuerBlock:^(NSError *error) {
+                   errorBlock(error);
+               }];
+}
 
 /**Search the content of a stream*/
+- (void)getSearchContentsWithStreamId:(NSString *)streamId
+                                query:(NSString *)query
+                                count:(NSString *)count
+                            newerThan:(NSString *)newerThan
+                         continuation:(NSString *)continuation
+                               fields:(NSString *)fields
+                             embedded:(NSString *)embedded
+                           engagement:(NSString *)engagement
+                               locale:(NSString *)locale
+                         SuccessBlock:(void (^)(NSDictionary *))successBlock
+                           errorBlock:(void (^)(NSError *))errorBlock{
+    NSString*url = [NSString stringWithFormat:@"%@%@",kOauth2ClientBaseUrl,kAPISearchContents];
+    NSMutableDictionary*params = [NSMutableDictionary dictionary];
+    [params setObject:streamId forKey:@"streamId"];
+    [params setObject:query forKey:@"query"];
+    if (count) [params setObject:count forKey:@"count"];
+    if (newerThan) [params setObject:newerThan forKey:@"newerThan"];
+    if (continuation) [params setObject:continuation forKey:@"continuation"];
+    if (fields) [params setObject:fields forKey:@"fields"];
+    if (embedded) [params setObject:embedded forKey:@"embedded"];
+    if (engagement) [params setObject:engagement forKey:@"engagement"];
+    if (locale) [params setObject:locale forKey:@"locale"];
+    
+    [self getRequestWithUrl:url
+                     params:params
+               successBlock:^(NSURLResponse *response, NSData *data) {
+                   NSError*error = nil;
+                   NSDictionary*result = [NSJSONSerialization JSONObjectWithData:data
+                                                                         options:0
+                                                                           error:&error];
+                   if (error) {
+                       errorBlock(error);
+                   }else{
+                       successBlock(result);
+                   }
+               } failuerBlock:^(NSError *error) {
+                   errorBlock(error);
+               }];
+}
 
 #pragma mark - Short URL
 //https://developer.feedly.com/v3/shorten/

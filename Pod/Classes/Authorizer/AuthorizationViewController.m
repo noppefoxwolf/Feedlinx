@@ -20,6 +20,13 @@
 
 @implementation AuthorizationViewController
 
+- (instancetype)initSample{
+    self = [self initWithScope:@"https://sandbox.feedly.com"
+                      clientId:@"sandbox"
+                  clientSecret:@"A4143F56J75FGQY7TAJM"];
+    return self;
+}
+
 - (instancetype)initWithScope:(NSString*)scope
                      clientId:(NSString *)cid
                  clientSecret:(NSString *)csecret{

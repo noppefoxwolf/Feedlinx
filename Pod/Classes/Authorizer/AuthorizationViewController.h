@@ -18,6 +18,7 @@
 @end
 
 @interface AuthorizationViewController : UIViewController
+- (instancetype)initSample;
 - (instancetype)initWithScope:(NSString *)scope
                      clientId:(NSString *)cid
                  clientSecret:(NSString *)csecret;

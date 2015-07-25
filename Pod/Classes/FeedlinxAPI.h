@@ -44,6 +44,10 @@ static NSString * const kAPIFeeds = @"/v3/feeds";
 static NSString * const kAPIStream = @"/v3/streams";
 ///v3/shorten/entries/
 static NSString * const kAPIShortenEntries = @"/v3/shorten/entries";
+///v3/search/feeds
+static NSString * const kAPISearchFeeds = @"/v3/search/feeds";
+///v3/search/contents
+static NSString * const kAPISearchContents = @"/v3/search/contents";
 ///v3/entries/
 static NSString * const kAPIEntries = @"/v3/entries";
 ///v3/profile
@@ -56,6 +60,9 @@ static NSString * const kAPISubscriptions = @"/v3/subscriptions";
 static NSString * const kOauth2ClientScopeUrl = @"https://cloud.feedly.com/subscriptions";
 ///v3/twitter/auth
 static NSString * const kAPITwitterAuth = @"/v3/twitter/auth";
+///v3/preferences
+static NSString * const kAPIPreferences = @"/v3/preferences";
+
 
 @interface FeedlinxAPI : NSObject
 + (instancetype)feedryAPIWithAccount:(FDXAccount*)account;
@@ -110,7 +117,11 @@ static NSString * const kAPITwitterAuth = @"/v3/twitter/auth";
 #pragma mark - Feeds
 //https://developer.feedly.com/v3/feeds/
 /**Get the metadata about a specific feed*/
+- (void)getFeedMetadataWithFeedId:(NSString*)feedId
+                     SuccessBlock:(void(^)(NSDictionary*responce))successBlock
+                       errorBlock:(void(^)(NSError *error))errorBlock;
 /**Get the metadata for a list of feeds*/
+
 #pragma mark - Markers
 //https://developer.feedly.com/v3/markers/
 //実装検証済み
@@ -191,9 +202,12 @@ static NSString * const kAPITwitterAuth = @"/v3/twitter/auth";
 #pragma mark - Preferences
 //https://developer.feedly.com/v3/preferences/
 /**Get the preferences of the user*/
-
+- (void)getPreferencesWithSuccessBlock:(void(^)(NSDictionary*result))successBlock
+                            errorBlock:(void(^)(NSError *error))errorBlock;
 /**Update the preferences of the user*/
-
+- (void)postPreferencesWithPreference:(NSDictionary*)preference
+                         successBlock:(void(^)())successBlock
+                           errorBlock:(void(^)(NSError *error))errorBlock;;
 #pragma mark - Profile
 //https://developer.feedly.com/v3/profile/
 //実装検証済み
@@ -201,11 +215,37 @@ static NSString * const kAPITwitterAuth = @"/v3/twitter/auth";
 - (void)getProfileWithSuccessBlock:(void(^)(NSDictionary*profile))successBlock
                         errorBlock:(void(^)(NSError *error))errorBlock;
 /**Update the profile of the user*/
+- (void)postProfileWithEmail:(NSString*)email
+                   givenName:(NSString*)givenName
+                  familyName:(NSString*)familyName
+                     picture:(NSString*)picture
+                      gender:(BOOL)gender
+                      locale:(NSString*)locale
+                     twitter:(NSString*)twitter
+                    facebook:(NSString*)facebook
+                successBlock:(void(^)(NSDictionary*result))successBlock
+                  errorBlock:(void(^)(NSError *error))errorBlock;
+
 #pragma mark - Search
 //https://developer.feedly.com/v3/search/
 /**Find feeds based on title, url or #topic*/
-
+- (void)getSearchFeedsWithQuery:(NSString*)query
+                          count:(NSString*)count
+                         locale:(NSString*)locale
+                   SuccessBlock:(void (^)(NSDictionary *))successBlock
+                     errorBlock:(void (^)(NSError *))errorBlock;
 /**Search the content of a stream*/
+- (void)getSearchContentsWithStreamId:(NSString*)streamId
+                                query:(NSString*)query
+                                count:(NSString*)count
+                            newerThan:(NSString*)newerThan
+                         continuation:(NSString*)continuation
+                               fields:(NSString*)fields
+                             embedded:(NSString*)embedded
+                           engagement:(NSString*)engagement
+                               locale:(NSString*)locale
+                         SuccessBlock:(void (^)(NSDictionary *))successBlock
+                           errorBlock:(void (^)(NSError *))errorBlock;
 
 #pragma mark - Short URL
 //https://developer.feedly.com/v3/shorten/
@@ -245,7 +285,6 @@ static NSString * const kAPITwitterAuth = @"/v3/twitter/auth";
 - (void)getSubscriptionsWithSuccessBlock:(void(^)(NSArray *result))successBlock
                               errorBlock:(void(^)(NSError *error))errorBlock;
 /**Subscribe to a feed*/
-
 
 /**Update an existing subscription*/
 
@@ -289,10 +328,7 @@ static NSString * const kAPITwitterAuth = @"/v3/twitter/auth";
 #pragma mark - Twitter
 //https://developer.feedly.com/v3/twitter/
 /**Link Twitter account*/
-//非実装
-//- (void)getLinktwitterAccountWithRedirectUri:(NSString*)redirectUri
-//                                SuccessBlock:(void (^)(NSArray *))successBlock
-//                                  errorBlock:(void (^)(NSError *))errorBlock;
+
 /**Unlink Twitter account*/
 
 /**Get suggested feeds*/
