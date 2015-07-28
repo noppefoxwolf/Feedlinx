@@ -23,6 +23,9 @@
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
+		D74D606B1B67499800FC2574 /* APITestUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = D74D606A1B67499800FC2574 /* APITestUtility.m */; };
+		D77193D31B67591D00BDE1EC /* opml.xml in Resources */ = {isa = PBXBuildFile; fileRef = D77193D11B67591D00BDE1EC /* opml.xml */; };
+		D77193D41B67591D00BDE1EC /* sample1.xml in Resources */ = {isa = PBXBuildFile; fileRef = D77193D21B67591D00BDE1EC /* sample1.xml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +67,10 @@
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		95E89498028CF477705F0664 /* Pods_Feedlinx_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Feedlinx_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2B8DEB2908A1ACBD802722A /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		D74D60691B67499800FC2574 /* APITestUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APITestUtility.h; sourceTree = "<group>"; };
+		D74D606A1B67499800FC2574 /* APITestUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APITestUtility.m; sourceTree = "<group>"; };
+		D77193D11B67591D00BDE1EC /* opml.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = opml.xml; sourceTree = "<group>"; };
+		D77193D21B67591D00BDE1EC /* sample1.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = sample1.xml; sourceTree = "<group>"; };
 		E6E08E8F462F3C95CE8C2B57 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -148,6 +155,8 @@
 				6003F5A6195388D20070C39A /* FDXViewController.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
+				D74D60691B67499800FC2574 /* APITestUtility.h */,
+				D74D606A1B67499800FC2574 /* APITestUtility.m */,
 			);
 			name = "Example for Feedlinx";
 			path = Feedlinx;
@@ -156,6 +165,8 @@
 		6003F594195388D20070C39A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D77193D11B67591D00BDE1EC /* opml.xml */,
+				D77193D21B67591D00BDE1EC /* sample1.xml */,
 				6003F595195388D20070C39A /* Feedlinx-Info.plist */,
 				6003F596195388D20070C39A /* InfoPlist.strings */,
 				6003F599195388D20070C39A /* main.m */,
@@ -279,6 +290,8 @@
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
+				D77193D41B67591D00BDE1EC /* sample1.xml in Resources */,
+				D77193D31B67591D00BDE1EC /* opml.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,6 +404,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F59E195388D20070C39A /* FDXAppDelegate.m in Sources */,
+				D74D606B1B67499800FC2574 /* APITestUtility.m in Sources */,
 				6003F5A7195388D20070C39A /* FDXViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);
@@ -515,6 +529,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Feedlinx/Feedlinx-Prefix.pch";
 				INFOPLIST_FILE = "Feedlinx/Feedlinx-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -530,6 +545,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Feedlinx/Feedlinx-Prefix.pch";
 				INFOPLIST_FILE = "Feedlinx/Feedlinx-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;

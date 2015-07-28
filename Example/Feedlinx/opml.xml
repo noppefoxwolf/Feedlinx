@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<opml version="1.0">
+    <head>
+        <title>Sample subscriptions in feedly Cloud</title>
+    </head>
+    <body>
+        <outline text="Tech" title="Tech">
+            <outline type="rss" text="GREE Engineers' Blog" title="GREE Engineers' Blog" xmlUrl="http://labs.gree.jp/blog/feed/" htmlUrl="http://labs.gree.jp/blog"/>
+            <outline type="rss" text="GREE Creators Blog" title="GREE Creators Blog" xmlUrl="http://cr.gree.jp/blog/feed/" htmlUrl="http://cr.gree.jp/blog"/>
+            <outline type="rss" text="" title="" xmlUrl="http://appli-anyalyze.apptrigger.me/feed/" htmlUrl="http://appli-anyalyze.apptrigger.me"/>
+        </outline>
+        <outline text="Design" title="Design">
+            <outline type="rss" text="サイエンスメディアな日々　　　インフォグラフィクスな日々" title="サイエンスメディアな日々　　　インフォグラフィクスな日々" xmlUrl="http://d.hatena.ne.jp/yasuda0404/rss" htmlUrl="http://scivis.hateblo.jp/"/>
+            <outline type="rss" text="Behance Featured Projects" title="Behance Featured Projects" xmlUrl="http://feeds.feedburner.com/behance/vorr" htmlUrl="http://www.behance.net"/>
+            <outline type="rss" text="WebClips_Design" title="WebClips_Design" xmlUrl="http://design.webclips.jp/feed/" htmlUrl="http://design.webclips.jp"/>
+        </outline>
+        <outline text="Android" title="Android">
+            <outline type="rss" text="juggly.cn" title="juggly.cn" xmlUrl="http://juggly.cn/feed" htmlUrl="http://juggly.cn"/>
+        </outline>
+        <outline text="It" title="It">
+            <outline type="rss" text="ITmedia News 速報 最新記事一覧" title="ITmedia News 速報 最新記事一覧" xmlUrl="http://rss.itmedia.co.jp/rss/1.0/news_bursts.xml" htmlUrl="http://www.itmedia.co.jp/news/bursts/"/>
+            <outline type="rss" text="MOONGIFT" title="MOONGIFT" xmlUrl="http://feeds.feedburner.com/moongift" htmlUrl="http://www.moongift.jp/"/>
+            <outline type="rss" text="Memopatch" title="Memopatch" xmlUrl="http://memo.goodpatch.co/feed/" htmlUrl="http://memo.goodpatch.co"/>
+            <outline type="rss" text="RAKUer, NEWer" title="RAKUer, NEWer" xmlUrl="http://blog.rakunew.com/rss" htmlUrl="http://blog.rakunew.com/"/>
+            <outline type="rss" text="Rebuild" title="Rebuild" xmlUrl="http://feeds.rebuild.fm/rebuildfm" htmlUrl="http://rebuild.fm"/>
+            <outline type="rss" text="Netbuffalo" title="Netbuffalo" xmlUrl="http://netbuffalo.doorblog.jp/index.rdf" htmlUrl="http://netbuffalo.doorblog.jp/"/>
+            <outline type="rss" text="" title="" xmlUrl="http://appli-anyalyze.apptrigger.me/feed/" htmlUrl="http://appli-anyalyze.apptrigger.me"/>
+            <outline type="rss" text="The Bridge（ザ・ブリッジ）" title="The Bridge（ザ・ブリッジ）" xmlUrl="http://feeds.feedburner.com/SdJapan" htmlUrl="http://thebridge.jp"/>
+        </outline>
+        <outline text="home" title="home">
+            <outline type="rss" text="Tools 4 Hack" title="Tools 4 Hack" xmlUrl="http://tools4hack.santalab.me/feed" htmlUrl="http://tools4hack.santalab.me"/>
+            <outline type="rss" text="MACお宝鑑定団 blog（羅針盤）" title="MACお宝鑑定団 blog（羅針盤）" xmlUrl="http://feeds2.feedburner.com/macotakara/fMAL" htmlUrl="http://www.macotakara.jp/blog/"/>
+            <outline type="rss" text="GREE Engineers' Blog" title="GREE Engineers' Blog" xmlUrl="http://labs.gree.jp/blog/feed/" htmlUrl="http://labs.gree.jp/blog"/>
+            <outline type="rss" text="テラバトル攻略速報｜TERRA BATTLE攻略・速報・まとめ" title="テラバトル攻略速報｜TERRA BATTLE攻略・速報・まとめ" xmlUrl="http://terrabattle-news.com/feed/" htmlUrl="http://terrabattle-news.com"/>
+            <outline type="rss" text="Engadget Japanese RSS Feed" title="Engadget Japanese RSS Feed" xmlUrl="http://japanese.engadget.com/rss.xml" htmlUrl="http://japanese.engadget.com"/>
+            <outline type="rss" text="RAKUer, NEWer" title="RAKUer, NEWer" xmlUrl="http://blog.rakunew.com/rss" htmlUrl="http://blog.rakunew.com/"/>
+            <outline type="rss" text="Netbuffalo" title="Netbuffalo" xmlUrl="http://netbuffalo.doorblog.jp/index.rdf" htmlUrl="http://netbuffalo.doorblog.jp/"/>
+            <outline type="rss" text="GREE Creators Blog" title="GREE Creators Blog" xmlUrl="http://cr.gree.jp/blog/feed/" htmlUrl="http://cr.gree.jp/blog"/>
+            <outline type="rss" text="カメラ速報まとめ　～かめそく～" title="カメラ速報まとめ　～かめそく～" xmlUrl="http://blog.livedoor.jp/kamesokumatome/index.rdf" htmlUrl="http://blog.livedoor.jp/kamesokumatome/"/>
+            <outline type="rss" text="Appleちゃんねる" title="Appleちゃんねる" xmlUrl="http://applech2.com/index.rdf" htmlUrl="http://applech2.com/"/>
+            <outline type="rss" text="juggly.cn" title="juggly.cn" xmlUrl="http://juggly.cn/feed" htmlUrl="http://juggly.cn"/>
+            <outline type="rss" text="はちま起稿" title="はちま起稿" xmlUrl="http://blog.esuteru.com/index.rdf" htmlUrl="http://blog.esuteru.com/"/>
+            <outline type="rss" text="サイエンスメディアな日々　　　インフォグラフィクスな日々" title="サイエンスメディアな日々　　　インフォグラフィクスな日々" xmlUrl="http://d.hatena.ne.jp/yasuda0404/rss" htmlUrl="http://scivis.hateblo.jp/"/>
+            <outline type="rss" text="俺的ゲーム速報" title="俺的ゲーム速報" xmlUrl="http://gamesoku.blogspot.com/feeds/posts/default" htmlUrl="http://gamesoku.blogspot.com/"/>
+            <outline type="rss" text="iPhone持って珍スポットいてくる" title="iPhone持って珍スポットいてくる" xmlUrl="http://itamiwake.blogspot.com/feeds/posts/default" htmlUrl="http://www.itamiwake.com/"/>
+            <outline type="rss" text="シェアしたくなる最新のWebサービス・ITニュース情報をチェック！ APPGIGA!!（アプギガ）" title="シェアしたくなる最新のWebサービス・ITニュース情報をチェック！ APPGIGA!!（アプギガ）" xmlUrl="http://plus.appgiga.jp/feed/" htmlUrl="http://plus.appgiga.jp"/>
+            <outline type="rss" text="DeNA Creator(クリエイター) Blog" title="DeNA Creator(クリエイター) Blog" xmlUrl="http://creator.dena.jp/index.rdf" htmlUrl="http://creator.dena.jp/"/>
+            <outline type="rss" text="男子ハック » Webサービス" title="男子ハック » Webサービス" xmlUrl="http://www.danshihack.com/category/webservice/feed" htmlUrl="http://www.danshihack.com"/>
+            <outline type="rss" text="ITmedia News 速報 最新記事一覧" title="ITmedia News 速報 最新記事一覧" xmlUrl="http://rss.itmedia.co.jp/rss/1.0/news_bursts.xml" htmlUrl="http://www.itmedia.co.jp/news/bursts/"/>
+            <outline type="rss" text="ライフハッカー［日本版］" title="ライフハッカー［日本版］" xmlUrl="http://www.lifehacker.jp/index.xml" htmlUrl="http://www.lifehacker.jp/"/>
+            <outline type="rss" text="クックパッド開発者ブログ" title="クックパッド開発者ブログ" xmlUrl="http://techlife.cookpad.com/feed/" htmlUrl="http://techlife.cookpad.com/"/>
+            <outline type="rss" text="New Projects : Kickstarter" title="New Projects : Kickstarter" xmlUrl="http://www.kickstarter.com/projects/feed.atom" htmlUrl="https://www.kickstarter.com/discover/recommended"/>
+            <outline type="rss" text="あんどろいど速報" title="あんどろいど速報" xmlUrl="http://androidken.blog119.fc2.com/?xml" htmlUrl="http://androidken.blog119.fc2.com/"/>
+            <outline type="rss" text="User Flow Patterns" title="User Flow Patterns" xmlUrl="http://userflowpatterns.com/feed/" htmlUrl="http://userflowpatterns.com"/>
+            <outline type="rss" text="ひとりぶろぐ" title="ひとりぶろぐ" xmlUrl="http://hitoriblog.com/?feed=rss2" htmlUrl="http://hitoriblog.com"/>
+            <outline type="rss" text="Objective-Cタグが付けられた新着投稿 - Qiita" title="Objective-Cタグが付けられた新着投稿 - Qiita" xmlUrl="http://qiita.com/tags/Objective-C/feed.atom" htmlUrl="http://qiita.com"/>
+            <outline type="rss" text="あんどろいどスマート" title="あんどろいどスマート" xmlUrl="http://feeds.feedburner.com/Androidsmart" htmlUrl="http://android-smart.com"/>
+            <outline type="rss" text="オモコロ あたまゆるゆるインターネット" title="オモコロ あたまゆるゆるインターネット" xmlUrl="http://omocoro.jp/?mode=rss" htmlUrl="http://omocoro.jp"/>
+            <outline type="rss" text="和洋風KAI" title="和洋風KAI" xmlUrl="http://feeds.wayohoo.com/wayohoo" htmlUrl="http://wayohoo.com/"/>
+            <outline type="rss" text="Gizmode_Japan 全文配信" title="Gizmode_Japan 全文配信" xmlUrl="http://pipes.yahoo.com/pipes/pipe.run?_id=2EG9ozz23BGMolMCTqoASA&amp;_render=rss" htmlUrl="http://pipes.yahoo.com/pipes/pipe.info?_id=2EG9ozz23BGMolMCTqoASA"/>
+            <outline type="rss" text="ウッドブック" title="ウッドブック" xmlUrl="http://woodbook.xyz/?feed=rss2" htmlUrl="http://woodbook.xyz"/>
+            <outline type="rss" text="All About [カメラ・AV機器]" title="All About [カメラ・AV機器]" xmlUrl="http://rss.rssad.jp/rss/allabout/digital/library" htmlUrl="http://rss.allabout.co.jp/aa/latest/ch/camera/"/>
+            <outline type="rss" text="Rebuild" title="Rebuild" xmlUrl="http://feeds.rebuild.fm/rebuildfm" htmlUrl="http://rebuild.fm"/>
+            <outline type="rss" text="タグ「webサービス」を検索 - はてなブックマーク" title="タグ「webサービス」を検索 - はてなブックマーク" xmlUrl="http://b.hatena.ne.jp/t/web%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9?sort=hot&amp;threshold=&amp;mode=rss" htmlUrl="http://b.hatena.ne.jp/search/tag?safe=on&amp;sort=recent&amp;q=web%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9&amp;users=3"/>
+            <outline type="rss" text="Ingress(イングレス)速報" title="Ingress(イングレス)速報" xmlUrl="http://ingress.blog.jp/index.rdf" htmlUrl="http://ingressblog.jp"/>
+            <outline type="rss" text="Developers.IO » iPhone" title="Developers.IO » iPhone" xmlUrl="http://dev.classmethod.jp/category/iphone/feed/" htmlUrl="http://dev.classmethod.jp"/>
+            <outline type="rss" text="Techable（テッカブル） -海外・国内のネットベンチャー系ニュースサイト" title="Techable（テッカブル） -海外・国内のネットベンチャー系ニュースサイト" xmlUrl="http://techable.jp/feed" htmlUrl="http://techable.jp"/>
+            <outline type="rss" text="The Bridge（ザ・ブリッジ）" title="The Bridge（ザ・ブリッジ）" xmlUrl="http://feeds.feedburner.com/SdJapan" htmlUrl="http://thebridge.jp"/>
+            <outline type="rss" text="Cocoa Controls" title="Cocoa Controls" xmlUrl="http://feeds.feedburner.com/cocoacontrols" htmlUrl="http://www.cocoacontrols.com"/>
+        </outline>
+        <outline text="Web" title="Web">
+            <outline type="rss" text="WebClips_Design" title="WebClips_Design" xmlUrl="http://design.webclips.jp/feed/" htmlUrl="http://design.webclips.jp"/>
+        </outline>
+        <outline text="個人ブログ" title="個人ブログ">
+            <outline type="rss" text="ジョン俺の写真ジョビ" title="ジョン俺の写真ジョビ" xmlUrl="http://wifeman.tokyo/blog/feed" htmlUrl="http://wifeman.tokyo/blog"/>
+            <outline type="rss" text="kako blog" title="kako blog" xmlUrl="http://www.kako.com/blog/?feed=rss2" htmlUrl="http://kako.com/blog"/>
+        </outline>
+        <outline text="Apple" title="Apple">
+            <outline type="rss" text="Appleちゃんねる" title="Appleちゃんねる" xmlUrl="http://applech2.com/index.rdf" htmlUrl="http://applech2.com/"/>
+        </outline>
+    </body>
+</opml>

@@ -106,6 +106,7 @@
 
 - (void)FDXOauth2Delegate:(FDXOauth2 *)oauth response:(NSDictionary *)response{
     FDXAccount*account = [FDXAccount accountWithStatus:response];
+    account.base_url = self.scope;
     if ([self.delegate respondsToSelector:@selector(authorizationViewController:didFinishUserAuthorize:)]) {
         [self.delegate authorizationViewController:self didFinishUserAuthorize:account];
     }

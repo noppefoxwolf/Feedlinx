@@ -18,6 +18,7 @@
     self = [super init];
     if (self) {
         self.status = status;
+        self.base_url = @"";
         self.access_token = self.status[@"access_token"];
         self.account_id = self.status[@"id"];
         self.plan = self.status[@"plan"];
@@ -35,6 +36,7 @@
 - (id)initWithCoder:(NSCoder *)decoder{
     self = [super init];
     if (self) {
+        self.base_url = [decoder decodeObjectForKey:@"base_url"];
         self.access_token = [decoder decodeObjectForKey:@"access_token"];
         self.account_id = [decoder decodeObjectForKey:@"id"];
         self.plan = [decoder decodeObjectForKey:@"plan"];
@@ -45,6 +47,7 @@
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder{
+    [encoder encodeObject:self.base_url forKey:@"base_url"];
     [encoder encodeObject:self.access_token forKey:@"access_token"];
     [encoder encodeObject:self.account_id forKey:@"id"];
     [encoder encodeObject:self.plan forKey:@"plan"];

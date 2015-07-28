@@ -8,18 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "FDXAccount.h"
-//for Feedly Oauth2(sandbox)
-//account type
-static NSString * const kOauth2ClientAccountType = @"Feedly";
-//clientId
-static NSString * const kOauth2ClientClientId = @"sandbox";
-//Client Secret
-static NSString * const kOauth2ClientClientSecret = @"A4143F56J75FGQY7TAJM";
 //Redirect Url
 static NSString * const kOauth2ClientRedirectUrl = @"http://localhost";
-//base url
-static NSString * const kOauth2ClientBaseUrl = @"https://sandbox.feedly.com";
-//static NSString * const kOauth2ClientBaseUrl = @"https://cloud.feedly.com";
 //auth url
 static NSString * const kOauth2ClientAuthUrl = @"/v3/auth/auth";
 //token url
@@ -56,8 +46,6 @@ static NSString * const kAPIProfile = @"/v3/profile";
 static NSString * const kAPIMixes = @"/v3/mixes";
 ///v3/subscriptions
 static NSString * const kAPISubscriptions = @"/v3/subscriptions";
-//scope url
-static NSString * const kOauth2ClientScopeUrl = @"https://cloud.feedly.com/subscriptions";
 ///v3/twitter/auth
 static NSString * const kAPITwitterAuth = @"/v3/twitter/auth";
 ///v3/preferences
@@ -65,12 +53,11 @@ static NSString * const kAPIPreferences = @"/v3/preferences";
 
 
 @interface FeedlinxAPI : NSObject
+
+#pragma mark - Authentication
 + (instancetype)feedryAPIWithAccount:(FDXAccount*)account;
 
 @property (nonatomic,readonly)FDXAccount*account;
-
-#pragma mark - Authentication
-
 
 #pragma mark - Categories
 //https://developer.feedly.com/v3/categories/
@@ -82,7 +69,7 @@ static NSString * const kAPIPreferences = @"/v3/preferences";
 /**Change the label of an existing category*/
 - (void)postCategoriesWithCategoryId:(NSString*)categoryId
                                label:(NSString*)label
-                        SuccessBlock:(void(^)(NSArray*categories))successBlock
+                        SuccessBlock:(void(^)())successBlock
                           errorBlock:(void(^)(NSError *error))errorBlock;
 //実装検証済み
 /**Delete a category*/
@@ -90,11 +77,6 @@ static NSString * const kAPIPreferences = @"/v3/preferences";
                           SuccessBlock:(void(^)())successBlock
                             errorBlock:(void(^)(NSError *error))errorBlock;
 
-#pragma mark - Dropbox
-//https://developer.feedly.com/v3/dropbox/
-/**Link Dropbox account (Pro only)*/
-/**Unlink Dropbox account*/
-/**Add an article in Dropbox (Pro only)*/
 #pragma mark - Entries
 //https://developer.feedly.com/v3/entries/
 /**Get the content of an entry*/
@@ -103,17 +85,7 @@ static NSString * const kAPIPreferences = @"/v3/preferences";
                    errorBlock:(void(^)(NSError *error))errorBlock;
 
 /**Get the content for a dynamic list of entries*/
-#pragma mark - Evernote
-//https://developer.feedly.com/v3/evernote/
-/**Link Evernote account*/
-/**Unlink Evernote account*/
-/**Get a list of Evernote notebooks (Pro only)*/
-/**Save an article as a note (Pro only)*/
-#pragma mark - Facebook
-//https://developer.feedly.com/v3/facebook/
-/**Link Facebook account*/
-/**Unlink Facebook account*/
-/**Get suggested feeds*/
+
 #pragma mark - Feeds
 //https://developer.feedly.com/v3/feeds/
 /**Get the metadata about a specific feed*/
@@ -171,12 +143,7 @@ static NSString * const kAPIPreferences = @"/v3/preferences";
 - (void)getLatestTaggedEntryIdsWithNewerThan:(NSString*)newerThan
                                 SuccessBlock:(void (^)(NSDictionary*result))successBlock
                                   errorBlock:(void (^)(NSError *error))errorBlock;
-#pragma mark - Microsoft
-//https://developer.feedly.com/v3/microsoft/
-/**Link Microsoft Account*/
-/**Unlink Windows Live account*/
-/**Retrieve the list of OneNote notebook sections (Pro only)*/
-/**Add an article in OneNote (Pro only)*/
+
 #pragma mark - Mixes
 //https://developer.feedly.com/v3/mixes/
 /**Get a mix of the most engaging content available in a stream*/
@@ -197,7 +164,9 @@ static NSString * const kAPIPreferences = @"/v3/preferences";
                         errorBlock:(void(^)(NSError *error))errorBlock;
 //実装検証済み
 /**Import an OPML*/
-- (void)postOPMLImportWithXMLFilePath:(NSString *)path finishBlock:(void (^)())finish;
+- (void)postOPMLImportWithXMLFilePath:(NSString *)path
+                         successBlock:(void(^)())successBlock
+                           errorBlock:(void(^)(NSError *error))errorBlock;
 
 #pragma mark - Preferences
 //https://developer.feedly.com/v3/preferences/
@@ -284,15 +253,26 @@ static NSString * const kAPIPreferences = @"/v3/preferences";
 /**Get the user’s subscriptions*/
 - (void)getSubscriptionsWithSuccessBlock:(void(^)(NSArray *result))successBlock
                               errorBlock:(void(^)(NSError *error))errorBlock;
-/**Subscribe to a feed*/
-
-/**Update an existing subscription*/
+/*
+ * Subscribe to a feed
+ * Update an existing subscription
+ */
+- (void)postSubscriptionWithStatus:(NSDictionary*)status
+                       successBlock:(void(^)(NSArray *result))successBlock
+                         errorBlock:(void(^)(NSError *error))errorBlock;
 
 /**Update multiple subscriptions*/
-
+- (void)postSubscriptionsWithStatuses:(NSArray*)statuses
+                       successBlock:(void(^)(NSArray *result))successBlock
+                         errorBlock:(void(^)(NSError *error))errorBlock;
 /**Unsubscribe from a feed*/
-
+- (void)deleteSubscriptionWithFeedId:(NSString*)feedId
+                        successBlock:(void(^)(NSArray *result))successBlock
+                          errorBlock:(void(^)(NSError *error))errorBlock;
 /**Unsubscribe from multiple feeds*/
+- (void)deleteSubscriptionWithFeedIds:(NSArray*)feedIds
+                        successBlock:(void(^)(NSArray *result))successBlock
+                          errorBlock:(void(^)(NSError *error))errorBlock;
 
 #pragma mark - Tags
 //https://developer.feedly.com/v3/tags/
@@ -325,16 +305,37 @@ static NSString * const kAPIPreferences = @"/v3/preferences";
                 successBlock:(void (^)())successBlock
                   errorBlock:(void (^)(NSError *))errorBlock;
 
+
+#pragma mark - Link Accounts API
+
 #pragma mark - Twitter
 //https://developer.feedly.com/v3/twitter/
 /**Link Twitter account*/
-
 /**Unlink Twitter account*/
-
 /**Get suggested feeds*/
-
 /**Get suggested feeds (alternate version)*/
-
+#pragma mark - Microsoft
+//https://developer.feedly.com/v3/microsoft/
+/**Link Microsoft Account*/
+/**Unlink Windows Live account*/
+/**Retrieve the list of OneNote notebook sections (Pro only)*/
+/**Add an article in OneNote (Pro only)*/
+#pragma mark - Dropbox
+//https://developer.feedly.com/v3/dropbox/
+/**Link Dropbox account (Pro only)*/
+/**Unlink Dropbox account*/
+/**Add an article in Dropbox (Pro only)*/
+#pragma mark - Evernote
+//https://developer.feedly.com/v3/evernote/
+/**Link Evernote account*/
+/**Unlink Evernote account*/
+/**Get a list of Evernote notebooks (Pro only)*/
+/**Save an article as a note (Pro only)*/
+#pragma mark - Facebook
+//https://developer.feedly.com/v3/facebook/
+/**Link Facebook account*/
+/**Unlink Facebook account*/
+/**Get suggested feeds*/
 
 #pragma mark - undocumented API
 

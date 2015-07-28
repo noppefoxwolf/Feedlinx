@@ -112,6 +112,8 @@
 		D046BDCB779E3C6B48B485C006D56188 /* EXPMatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = C1F2F13DF90FB725E87BBB019599D267 /* EXPMatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0E998E5AE5E4360585197620FF9DB17 /* EXPUnsupportedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3344265A59E288077AFAA98F09F90FE8 /* EXPUnsupportedObject.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D6829AB00AC5A585F0B4245F981B6245 /* EXPMatchers+beLessThanOrEqualTo.m in Sources */ = {isa = PBXBuildFile; fileRef = D2CBF9F0376827141D2CAA047E4B7EDD /* EXPMatchers+beLessThanOrEqualTo.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D77193CF1B67550300BDE1EC /* FeedlinxUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = D77193CB1B6751CA00BDE1EC /* FeedlinxUtility.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D77193D01B67550800BDE1EC /* FeedlinxUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = D77193CC1B6751CA00BDE1EC /* FeedlinxUtility.m */; };
 		DCEB12CB28C3E7F9CE152553EDA32076 /* FDXOauth2.h in Headers */ = {isa = PBXBuildFile; fileRef = B1A77F29A8C42DE52EB4DE1F43F2AEA0 /* FDXOauth2.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DE31F4DD58AFF2D8F69365EAC4FD3092 /* Expecta.h in Headers */ = {isa = PBXBuildFile; fileRef = B79277E6C42FEEE8E0DE5A89BB03F2D3 /* Expecta.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DF7A4B929507BD06EB6A513468806656 /* Pods-Feedlinx_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 85854BF15EAF568286B5623C854DFA4F /* Pods-Feedlinx_Example-dummy.m */; };
@@ -311,6 +313,8 @@
 		D32EC17EE1E95F0E391A13F1E8524274 /* EXPMatchers+beLessThan.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "EXPMatchers+beLessThan.m"; path = "Expecta/Matchers/EXPMatchers+beLessThan.m"; sourceTree = "<group>"; };
 		D44E7DD302324A36A9A96F66174ED528 /* Specta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Specta.xcconfig; sourceTree = "<group>"; };
 		D5152704FF77B5269C38CDB079123A79 /* Expecta-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Expecta-umbrella.h"; sourceTree = "<group>"; };
+		D77193CB1B6751CA00BDE1EC /* FeedlinxUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedlinxUtility.h; sourceTree = "<group>"; };
+		D77193CC1B6751CA00BDE1EC /* FeedlinxUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedlinxUtility.m; sourceTree = "<group>"; };
 		D849DB0B08FF6400DAFB7E4735B0786B /* EXPMatchers+match.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "EXPMatchers+match.m"; path = "Expecta/Matchers/EXPMatchers+match.m"; sourceTree = "<group>"; };
 		DDFDA1DE753F79FAE9D4A830DB88C5CE /* EXPMatchers+beCloseTo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+beCloseTo.h"; path = "Expecta/Matchers/EXPMatchers+beCloseTo.h"; sourceTree = "<group>"; };
 		DEE72195F85CA4BDAB8AE394041DD598 /* EXPMatchers+beInstanceOf.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+beInstanceOf.h"; path = "Expecta/Matchers/EXPMatchers+beInstanceOf.h"; sourceTree = "<group>"; };
@@ -692,6 +696,8 @@
 				016E38CE0A5784EE373FBBEB01BF4FD6 /* FeedlinxAPI.h */,
 				5D383B3E1AF06491979D281B8296FCB7 /* FeedlinxAPI.m */,
 				995CD6AB5F2F52A673B63571E54C23F8 /* Authorizer */,
+				D77193CB1B6751CA00BDE1EC /* FeedlinxUtility.h */,
+				D77193CC1B6751CA00BDE1EC /* FeedlinxUtility.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -713,6 +719,7 @@
 			files = (
 				856210DB8C500E87656FF129136263BA /* AuthorizationViewController.h in Headers */,
 				42383ED9664CB171BEFD7BA0A1CE8AF1 /* FDXAccount.h in Headers */,
+				D77193CF1B67550300BDE1EC /* FeedlinxUtility.h in Headers */,
 				DCEB12CB28C3E7F9CE152553EDA32076 /* FDXOauth2.h in Headers */,
 				A1D3CA32C86D05F26EBA43AEAC289C2D /* FDXUtil.h in Headers */,
 				F9A4147A1BAD7B6317664EF04BC97534 /* Feedlinx-umbrella.h in Headers */,
@@ -1051,6 +1058,7 @@
 				8CBE8450407D9718594A2430E8C9FC72 /* FDXAccount.m in Sources */,
 				4F7E9C372875658CEEC784D56D6C136A /* FDXOauth2.m in Sources */,
 				2DA46F0B4A0502764E7BF31F021A1630 /* FDXUtil.m in Sources */,
+				D77193D01B67550800BDE1EC /* FeedlinxUtility.m in Sources */,
 				FCC940BF593DD7A2A208F28C6023562B /* Feedlinx-dummy.m in Sources */,
 				252894E980497DA82FBADD0A9D382378 /* FeedlinxAPI.m in Sources */,
 			);

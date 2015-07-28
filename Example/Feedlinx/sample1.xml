@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<opml version="1.0">
+    <head>
+        <title>Empty subscriptions in feedly Cloud</title>
+    </head>
+    <body>
+        <outline text="Sample1" title="Sample1">
+            <outline type="rss" text="GREE Engineers' Blog" title="GREE Engineers' Blog" xmlUrl="http://labs.gree.jp/blog/feed/" htmlUrl="http://labs.gree.jp/blog"/>
+            <outline type="rss" text="GREE Creators Blog" title="GREE Creators Blog" xmlUrl="http://cr.gree.jp/blog/feed/" htmlUrl="http://cr.gree.jp/blog"/>
+            <outline type="rss" text="" title="" xmlUrl="http://appli-anyalyze.apptrigger.me/feed/" htmlUrl="http://appli-anyalyze.apptrigger.me"/>
+        </outline>
+        <outline text="Sample2" title="Sample2">
+            <outline type="rss" text="GREE Engineers' Blog" title="GREE Engineers' Blog" xmlUrl="http://labs.gree.jp/blog/feed/" htmlUrl="http://labs.gree.jp/blog"/>
+            <outline type="rss" text="GREE Creators Blog" title="GREE Creators Blog" xmlUrl="http://cr.gree.jp/blog/feed/" htmlUrl="http://cr.gree.jp/blog"/>
+            <outline type="rss" text="" title="" xmlUrl="http://appli-anyalyze.apptrigger.me/feed/" htmlUrl="http://appli-anyalyze.apptrigger.me"/>
+        </outline>
+    </body>
+</opml>

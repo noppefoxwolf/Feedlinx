@@ -10,6 +10,7 @@
 #import "Feedlinx.h"
 #import "FDXAccount.h"
 #import "AuthorizationViewController.h"
+#import "APITestUtility.h"
 
 @interface FDXViewController ()<AuthorizationViewControllerDelegate>
 
@@ -24,7 +25,8 @@
     NSUserDefaults*df = [NSUserDefaults standardUserDefaults];
     FDXAccount*account = [NSKeyedUnarchiver unarchiveObjectWithData:[df objectForKey:@"account"]];
     if(account) {// 一度はOAuth認証を通した場合
-        [self testAPI:account];
+//        [self testAPI:account];
+        [[[APITestUtility alloc] initWithAccount:account] exec];
     } else {// 一度もOAuth認証を通っていない場合
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.0 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
             AuthorizationViewController*vc = [[AuthorizationViewController alloc] initWithScope:@"https://sandbox.feedly.com"
@@ -37,10 +39,8 @@
     }
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 

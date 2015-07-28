@@ -10,6 +10,7 @@
 
 @interface FDXAccount : NSObject<NSCoding>
 + (instancetype)accountWithStatus:(NSDictionary*)status;
+@property NSString*base_url;
 @property NSString*access_token;
 @property NSString*account_id;
 @property NSString*plan;
